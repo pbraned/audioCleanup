@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 RUN python3.11 -m pip install resemble-enhance --upgrade
-#WORKDIR /data
+WORKDIR /data
 
 #RUN python3.11 -m pip install flask
 #COPY ./app /app
