@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1
+
 FROM python:3.11-slim
 RUN python3.11 -m pip install resemble-enhance --upgrade
 
