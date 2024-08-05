@@ -32,11 +32,12 @@ def upload():
         #mp4_filename = f"{os.path.splitext(filename)[0]}.mp4"
         #mp4_path = os.path.join(app.config['UPLOAD_FOLDER'], mp4_filename)
         denoised_path = "/tmp" # os.path.join(app.config['UPLOAD_FOLDER'], output)
-        bash_command = f'resemble-enhance {wav_path} {denoised_path}'
+        output_wav = os.path.join(denoised_path, filename)
+        bash_command = f'resemble-enhance {wav_path} {denoised_path} --device cpu'
         subprocess.call(bash_command, shell=True)
 
         # Serve the converted file as a response
-        return send_file(denoised_path, as_attachment=True, attachment_filename=filename)
+        return send_file(output_wav, as_attachment=True, mimetype="audio/wav", download_name="cleanAudio.wav")
 
 if __name__ == '__main__':
     app.run(debug=True)
