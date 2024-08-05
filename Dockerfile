@@ -1,7 +1,8 @@
 # syntax=docker/dockerfile:1
 
 FROM python:3.11-slim
-RUN python3.11 -m pip install resemble-enhance --upgrade
+RUN python3.11 -m pip install -r requirements.txt
+# resemble-enhance --upgrade
 
 RUN apt update && apt-get install libgomp1 libsndfile1 -y
 #WORKDIR /data
