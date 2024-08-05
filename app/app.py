@@ -4,12 +4,12 @@ import subprocess
 import os
 
 app = Flask(__name__)
-#app.config['UPLOAD_FOLDER'] = './uploads'
+app.config['UPLOAD_FOLDER'] = './uploads'
 
 @app.route('/')
 def index():
     return render_template('index.html')
-'''
+
 @app.route('/upload', methods=['POST'])
 def upload():
     # Check if the POST request has the file part
@@ -37,6 +37,6 @@ def upload():
 
         # Serve the converted file as a response
         return send_file(denoised_path, as_attachment=True, attachment_filename=filename)
-'''
+
 if __name__ == '__main__':
     app.run(debug=True)
