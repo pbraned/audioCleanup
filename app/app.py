@@ -27,13 +27,10 @@ def upload():
         filename = file.filename
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-        # Call the bash script to convert WAV to MP4
-        wav_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        #mp4_filename = f"{os.path.splitext(filename)[0]}.mp4"
-        #mp4_path = os.path.join(app.config['UPLOAD_FOLDER'], mp4_filename)
+        wav_path = app.config['UPLOAD_FOLDER']
         denoised_path = "/tmp" # os.path.join(app.config['UPLOAD_FOLDER'], output)
         output_wav = os.path.join(denoised_path, filename)
-        bash_command = f'resemble-enhance {wav_path} {denoised_path} --device cpu'
+        bash_command = f'resemble-enhance {wav_path} {denoised_path} --denoise_only --device cpu'
         subprocess.call(bash_command, shell=True)
 
         # Serve the converted file as a response
