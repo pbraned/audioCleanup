@@ -12,7 +12,7 @@ RUN apt update && apt-get install libgomp1 libsndfile1 -y
 RUN python3.11 -m pip install flask
 COPY ./app /app
 WORKDIR /app
-RUN mkdir -p /app/uploads /app/output
+RUN mkdir -p /app/uploads /app/downloads /app/output
 
 CMD flask run --host=0.0.0.0 --port=5000
 EXPOSE 5000
