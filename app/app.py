@@ -5,6 +5,7 @@ import os
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = './uploads'
+app.config['DOWNLOAD_FOLDER'] = './downloads'
 
 @app.route('/')
 def index():
@@ -28,7 +29,7 @@ def upload():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
         wav_path = app.config['UPLOAD_FOLDER']
-        denoised_path = "/tmp" # os.path.join(app.config['UPLOAD_FOLDER'], output)
+        denoised_path = app.config['DOWNLOAD_FOLDER'] #"/tmp" # os.path.join(app.config['UPLOAD_FOLDER'], output)
         output_wav = os.path.join(denoised_path, filename)
         bash_command = f'resemble-enhance {wav_path} {denoised_path} --denoise_only --device cpu'
         subprocess.call(bash_command, shell=True)
