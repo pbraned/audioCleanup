@@ -4,8 +4,8 @@ import subprocess
 import os
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = './uploads'
-app.config['DOWNLOAD_FOLDER'] = './downloads'
+app.config['UPLOAD_FOLDER'] = '/app/uploads'
+app.config['DOWNLOAD_FOLDER'] = '/app/downloads'
 
 @app.route('/')
 def index():
