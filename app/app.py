@@ -31,8 +31,11 @@ def upload():
         wav_path = app.config['UPLOAD_FOLDER']
         denoised_path = app.config['DOWNLOAD_FOLDER'] #"/tmp" # os.path.join(app.config['UPLOAD_FOLDER'], output)
         output_wav = os.path.join(denoised_path, filename)
-        bash_command = f'resemble-enhance {wav_path} {denoised_path} --denoise_only --device cpu'
-        subprocess.call(bash_command, shell=True)
+        #bash_command = f'resemble-enhance {wav_path} {denoised_path} --denoise_only --device cpu'
+        #subprocess.call(bash_command, shell=True)
+        subprocess.call(['touch',output_wav], shell=True)
+        print('--------test debug ------------')
+        print(subprocess.call(['ls',output_wav], shell=True))
 
         # Serve the converted file as a response
         return send_file(output_wav, as_attachment=True, mimetype="audio/wav", download_name="cleanAudio.wav")
