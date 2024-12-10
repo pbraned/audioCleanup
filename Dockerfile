@@ -2,7 +2,7 @@
 
 FROM python:3.11-slim
 #COPY ./requirements.txt ./
-RUN python3.11 -m pip install resemble-enhance --upgrade --pre
+#RUN python3.11 -m pip install resemble-enhance --upgrade --pre
 #-r requirements.txt
 
 
