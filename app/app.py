@@ -33,7 +33,7 @@ def upload():
         output_wav = os.path.join(denoised_path, filename)
         #bash_command = f'resemble-enhance {wav_path} {denoised_path} --denoise_only --device cpu'
         #subprocess.call(bash_command, shell=True)
-        subprocess.call(['touch',output_wav], shell=True)
+        subprocess.call(['touch',output_wav])
         print(subprocess.call(['ls /app/*/'], shell=True))
 
         # Serve the converted file as a response
