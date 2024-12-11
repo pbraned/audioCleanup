@@ -35,7 +35,7 @@ def upload():
         with open(log_file, 'w') as file:
             # Run 'ls -a' and store both stdout and stderr to the log file
             #subprocess.call(['ls', '-a', directory], stdout=file, stderr=file)
-            subprocess.call(['resemble-enhance', wav_path, denoised_path, '--denoise_only', '--device', 'cpu'], stdout=file, stderr=file)
+            subprocess.call(['resemble-enhance', wav_path, denoised_path, '--denoise_only', '--device', 'cpu'], stdout=file, stderr=file, shell=True)
         
         # Use 'cat' to print the contents of the log file
         subprocess.call(['cat', log_file], shell=True)
