@@ -32,11 +32,16 @@ def upload():
         denoised_path = app.config['DOWNLOAD_FOLDER'] #"/tmp" # os.path.join(app.config['UPLOAD_FOLDER'], output)
         output_wav = os.path.join(denoised_path, filename)
         log_file = '/app/log.txt'
-        #bash_command = f'resemble-enhance {wav_path} {denoised_path} --denoise_only --device cpu'
-        subprocess.call(['resemble-enhance', wav_path, denoised_path, '--denoise_only', '--device', 'cpu'], stdout=open(log_file, 'w'))
-        #subprocess.call(['touch',output_wav])
-        print(subprocess.call(['ls /app/*/'], shell=True))
+        with open(log_file, 'w') as file:
+            # Run 'ls -a' and store both stdout and stderr to the log file
+            #subprocess.call(['ls', '-a', directory], stdout=file, stderr=file)
+            subprocess.call(['resemble-enhance', wav_path, denoised_path, '--denoise_only', '--device', 'cpu'], stdout=file, stderr=file)
+        
+        # Use 'cat' to print the contents of the log file
         subprocess.call(['cat', log_file])
+        #bash_command = f'resemble-enhance {wav_path} {denoised_path} --denoise_only --device cpu'
+        #subprocess.call(['touch',output_wav])
+        subprocess.call(['ls /app/*/'], shell=True)
 
         # Serve the converted file as a response
         return send_file(output_wav, as_attachment=True, mimetype="audio/wav", download_name="cleanAudio.wav")
