@@ -35,13 +35,13 @@ def upload():
         with open(log_file, 'w') as file:
             # Run 'ls -a' and store both stdout and stderr to the log file
             #subprocess.call(['ls', '-a', directory], stdout=file, stderr=file)
-            subprocess.call(['resemble-enhance', wav_path, denoised_path, '--denoise_only', '--device', 'cpu'], stdout=file, stderr=file, shell=True)
+            subprocess.call(['resemble-enhance', wav_path, denoised_path, '--denoise_only', '--device', 'cpu'], stdout=file, stderr=file, shell=False)
         
         # Use 'cat' to print the contents of the log file
-        subprocess.call(['cat', log_file], shell=True)
+        #subprocess.call(['cat', log_file], shell=True)
         #bash_command = f'resemble-enhance {wav_path} {denoised_path} --denoise_only --device cpu'
         #subprocess.call(['touch',output_wav])
-        subprocess.call(['ls /app/*'], shell=True)
+        #subprocess.call(['ls /app/*'], shell=True)
 
         # Serve the converted file as a response
         return send_file(output_wav, as_attachment=True, mimetype="audio/wav", download_name="cleanAudio.wav")
