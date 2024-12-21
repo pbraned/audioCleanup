@@ -1,5 +1,5 @@
 # app.py
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, send_from_directory
 import subprocess
 import os
 
@@ -45,6 +45,15 @@ def upload():
 
         # Serve the converted file as a response
         return send_file(output_wav, as_attachment=True, mimetype="audio/wav", download_name="cleanAudio.wav")
+
+@app.route('/download-log', methods=['GET'])
+def download_log():
+    # Serve the log.txt file for download
+    log_file = '/app/log.txt'
+    return send_from_directory(os.path.dirname(log_file), 
+                               os.path.basename(log_file), 
+                               as_attachment=True)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
